@@ -1,3 +1,29 @@
+/*Adding OVERALL STYLES OF THE WEBSITE*/
+* {
+    box-sizing: border-box; /*Here I could used the padding but it doesnt make the box wider*/
+}
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.6;
+    color: #212529;
+    background-color: #f8f9fa;
+}
+main {
+    padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+}
+section {
+    margin-bottom: 2.5rem;
+}
+a {
+    color: #0b5ed7;
+}
 /* Adding HEADER AND NAVIGATION styles */
 header {
     background-color: hsl(0, 6%, 17%);
@@ -27,5 +53,13 @@ nav a {
 nav a:hover {
     background-color: rgb(73, 61, 61);
     padding: 8px 14px;
-  
+
+}
+/*Adding CONTACT styles*/
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+.contact-list li {
+    margin-bottom: 4px;
 }

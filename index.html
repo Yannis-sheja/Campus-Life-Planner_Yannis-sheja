@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Life Planner</title>
     <link rel="stylesheet" href="styles/main.css"> <!--It links to our main.css for styling-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!--Firstly, we add:
     THE NAVIGATION BAR-->
     <header>
         <p class="brand"> Campus Life Planner </p>
-        <nav aria-label="Main">
+        <nav aria-label="Main"><!-- The aria-label names the landmark which is the navigation-->
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#dashboard">Dashboard</a></li>
@@ -23,6 +26,34 @@
         </nav>
 
     </header>
+    <!--Secondly,
+    THE MAIN CONTENT-->
+    <main id="main">
+        <h1> Campus Life Planner</h1>
+        <p> </p>
+        <!-- The ABOUT section-->
+         <section id="about" aria-labelledby="aboutHeading"><!-- The aria-labelledby names the section by its heading-->
+            <h2 id="aboutHeading"> About </h2>
+            <p> A Campus Planner is a personal tool that helps to organize your day. It creates tasks, events,
+                set the due dates, and also track how long each task takes so you can see where you time 
+                actually goes.
+            </p>
+            <p> Add tags to group-related items, and uses the search bar, which helps to support regular expressions
+                to find exactly what you need or want, from simple keywords to advanced patterns.
+                A summary of your tracked time aids in reviewing your progress over time.
+            </p>
+            <p> There is no need to sign-up or creating an ccount. All your data is stored locally in the browser,
+                so it stays private and works offline. Clearing your browser data will remove it though,
+                so it is better to export a backup if you want to keep it safe.
+            </p>
+            <h3> Contact </h3>
+            <ul class="contact-list">
+                <li> Email: <a href="mailto:shejayan123@gmail.com">shejayan123@gmail.com</a></li>
+                <li> Github: <a href="https://github.com/Yannis-sheja" target="_blank" rel="noopener noreferrer">github.com/Yannis-sheja</a></li>
+                <li> LinkedIn:<a href="" target="_blank" rel="noopener noreferrer">linkedin.com/in/Yannis Sheja </a></li>
+            </ul>
+         </section>
+    </main>
     
 </body>
 </html>
