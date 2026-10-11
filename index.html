@@ -30,7 +30,8 @@
     THE MAIN CONTENT-->
     <main id="main">
         <h1> Campus Life Planner</h1>
-        <p> </p>
+        <p id="status" class="status" role="status"> </p>
+        <p id="error" class="error" role="alert"> </p>
         <!-- The ABOUT section-->
          <section id="about" aria-labelledby="aboutHeading"><!-- The aria-labelledby names the section by its heading-->
             <h2 id="aboutHeading"> About </h2>
@@ -52,7 +53,72 @@
                 <li> Github: <a href="https://github.com/Yannis-sheja" target="_blank" rel="noopener noreferrer">github.com/Yannis-sheja</a></li>
                 <li> LinkedIn:<a href="" target="_blank" rel="noopener noreferrer">linkedin.com/in/Yannis Sheja </a></li>
             </ul>
+        <!--The DASHBOARD section-->
          </section>
+         <section id="dashboard" aria-labelledby="dashboardHeading">
+            <h2 id="dashboardHeading">Dashboard</h2>
+            <div class="cards"> <!-- Here, JavaScript will aid in filling the empty <p> tags and there is 4 number cards-->
+                <div class="card"><h3>Total Tasks</h3><p id="statCount"></p></div>
+                <div class="card"><h3>Total Time</h3><p id="statTotal"></p></div>
+                <div class="card"><h3>Top Tags </h3><p id="statTop"></p></div>
+                <div class="card"><h3>Last 7 days </h3><p id="statWeek"></p></div>
+            </div>
+            <!-- Here lies the Weekcap messages. So, We fill one of the two live regions;
+             -Polite(when it turns) when under the cap
+             -Assertive(interrupts) when over-->
+             <div id="capBox" class="cap ok">
+                <div id="capPolite" aria-live="polite"> </div>
+                <div id="capAssertive" aria-live="assertive"></div>
+            </div>
+            <h3> Planned Time per day (last 7days)</h3>
+            <div id="chart"></div><!-- The Chart or the bar chart will be drawn by JavaScript-->
+         </section>
+         <!--The TASKS section-->
+         <section id="tasks" aria-labelledby="tasksHeading">
+            <h2 id="tasksHeading" tabindex="-1">Tasks</h2> <!-- The tabindex="-1" lets JavaScript move the focus here
+            (after a delete)-->
+            <div class="toolbar">
+                <div>
+                <!-- The label tag for="search" is linked with the id="search" thus helping for searching-->
+                    <label for="search"> Search with a Regex </label>
+                    <input id="search" type="search" autocomplete="off" aria-describedby="searchError"
+                        placeholder="Try: ^Study or \b\d{2}:\d{2}\b">
+                    <div id="searchError" class="error" role="status"></div>
+                </div>
+                <div>
+                    <label for="sortBy">Sort by</label>
+                    <select id="sortBy">
+                        <option value="date-desc"> Due date (newest)</option>
+                        <option value="date-asc"> Due date (oldest)</option>
+                        <option value="title-asc"> Title (A-Z)</option>
+                        <option value="title-desc"> Title (Z-A)</option>
+                        <option value="duration-asc"> Duraion (Low-High)</option>
+                        <option value="duration-desc"> Duration (High-low)</option>
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <input id="ignoreCase" type="checkbox" checked>
+                    <label for="ignoreCase"> Ignore case</label>
+                </div>
+            </div>
+            <p id="count" class="small" aria-live="polite"></p>
+            <table>
+                <caption class="visually-hidden"> Your Tasks</caption> <!-- It is only the title for screen readers only-->
+                <thead>
+                    <tr>
+                        <th scope="col"> Title </th>
+                        <th scope="col"> Due date</th>
+                        <th scope="col"> Duration</th>
+                        <th scope="col">Tag </th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    
+                    <tbody id="rows"></tbody> <!-- This rows or body will be filled by JavaScript-->
+                </thead>
+                <p id="empty"></p>
+            </table>
+         </section>
+
     </main>
     
 </body>
