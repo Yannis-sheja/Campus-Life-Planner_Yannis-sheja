@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <!--Firstly, we add:
     THE NAVIGATION BAR-->
     <header>
@@ -118,7 +119,57 @@
                 <p id="empty"></p>
             </table>
          </section>
+         <!-- The ADD TASK section-->
+         <section id="add" aria-labelledby="addHeading">
+            <h2 id="addHeading"> Add Tasks</h2>
+            <form id="taskForm" novalidate> <!-- This "novalidate" will help us turn off the browser's error bubbles so
+                that ours are used instead-->
+                <div>
+                    <label for="title"> Title</label>
+                    <input id="title" autocomplete="off" aria-describedby="titleError"> <!-- "aria-describedby" helps us to link
+                    to its error message-->
+                    <div id="titleError" class="error"></div>
 
+                    <label for="dueDate"> Due date</label>
+                    <input id="dueDate" placeholder="YYYY-MM-DD" autocomplete="off" aria-describedby="dueDateError">
+                    <div id="dueDateError" class="error"></div>
+                    
+                    <label for="duration"> Duration </label>
+                    <input id="duration" inputmode="decimal" autocomplete="off" aria-describedby="durationError"> <!--"inputmode='decimal'" helps
+                    us a number keypad on the mobile phones-->
+                    <div id="durationError" class="error"></div>
+
+                    <label for="tag"> Tag </label>
+                    <input id="tag" autocomplete="off" aria-describedby="tagError">
+                    <div id="tagError" class="error"></div>
+                </div>
+            </form>
+         </section>
+         <section id="settings" arialabelledby="settingsHeading">
+            <h2 id="settingsHeading"> Settings </h2>
+            <form id="settingsForm" novalidate>
+                <div>
+                    <label for="unit">Show Durations in</label>
+                    <select id="unit">
+                        <option value="hours"> Hours </option>
+                        <option value="minutes"> Minutes</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="cap"> Weekly Cap (minutes, last 7days) </label>
+                    <input id="cap" inputmode="decimal" autocomplete="off" aria-describedby="capError">
+                    <div id="capError" class="error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary"> Save settings</button>
+            </form>
+
+            <h3> Your Data </h3>
+            <button id="export" type="button" class="btn"> Export JSON</button>
+            <div>
+                <label for="import"> Import JSON </label>
+                <input id="import" type="file" accept=".json,application/json">
+            </div> 
+         </section>
     </main>
     
 </body>

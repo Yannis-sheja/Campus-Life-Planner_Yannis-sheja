@@ -25,6 +25,39 @@ section {
 a {
     color: #0b5ed7;
 }
+.small {
+    font-size: .875rem;
+}
+.visually-hidden {
+    position: absolute;
+    left: -9999px;
+}
+/* Adding SKIP TO MAIN CONTENT styles*/
+/* skip-link: it is not shown on the screen, but it slides when it gets a keyboard focus*/
+.skip-link {
+    position: absolute;
+    left: .5rem;
+    top: -4rem;
+    padding: .5rem 1rem;
+    z-index: 10;
+    background-color: hsl(0, 0%, 100%);
+    border: 2px solid hsl(216, 90%, 44%);
+    transition: top .2s;
+    background-color: hsl(216, 90%, 31%);
+}
+.skip-link:focus {
+    top: .5rem;
+}
+/* This is a clear outline on whatever has a keyboard focus*/
+:focus-visible {
+    outline: 3px solid #0b5ed7;
+    outline-offset: 2px;
+}
+mark {
+    background-color: hsl(48, 100%, 70%);
+    color: hsl(0, 0%, 0%); 
+}
+/* This highlights the search matches */
 /* Adding HEADER AND NAVIGATION styles */
 header {
     background-color: hsl(0, 6%, 17%);
@@ -112,6 +145,7 @@ nav a:hover {
 /*Adding TABLE styles*/
 thead {
     position: absolute;
+    left:-9999px;
 }
 table, tbody, tr, td {
     display:block;
@@ -134,3 +168,147 @@ td {
 td input {
     width: 60%;
 }
+/*Adding FORM AND BUTTONS styles*/
+form, .toolbar {
+    display: grid;
+    gap: .1rem;
+}
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: .25rem;
+}
+input, select {
+    width: 100%;
+    padding: .5rem;
+    font: inherit;
+    border: 1px solid hsl(208, 7%, 46%);
+    border-radius: .25rem;
+}
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.checkbox input {
+    width: auto;
+}
+.checkbox label {
+    margin: 0;
+}
+
+.error {
+    color: hsl(354, 61%, 43%);
+    font-size: .880rem;
+}
+.error:empty {
+    display: none;
+}
+/* There cant be any empty when there is no error */
+input[aria-invalid="true"] {
+    border-color: hsl(354, 61%, 43%) ;
+    background: hsl(0, 100%, 98%);
+}
+.status {
+    color: hsl(138, 69%, 25%) ;
+    font-weight: 600;
+}
+.btn {
+    padding: .4rem .8rem;
+    font: inherit;
+    cursor: pointer;
+    color: hsl(216, 90%, 44%);
+    background: #fff;
+    border: 1px solid hsl(216, 90%, 44%);
+    border-radius: .25rem;
+    transition: background .2s, color .2s;
+}
+.btn:hover {
+    background-color: hsl(216, 90%, 44%);
+    color:hsl(0, 0%, 100%);
+}
+.btn-primary {
+    background-color: hsl(216, 90%, 44%);
+    color:hsl(0, 0%, 100%);
+}
+.btn-primary:hover {
+    background-color: hsl(216, 90%, 31%);
+}
+
+/* Now its time for the fun part, ANIMATIONS,
+We are going to use the keyframes*/
+@keyframes fade { from {opacity: 0;} to {opacity: 1;}}
+@keyframes grow { from {transform: scaleX(0);} to {transform: scaleX(1)}}
+
+/* Adding BREAKPOINTS, this is where the screen gets wider*/
+/* 360px and up: This is mainly for normal phones where they only get 2 cards per row */
+@media (min-width: 360px) {
+    .cards {
+        grid-template-columns: 1fr 1fr ;
+    }
+}
+/*768px and up: this is mainly for tables where the tables are formed and forms 2 columns */
+@media (min-width: 768px) {
+  h1{ font-size: 2rem;}
+  form { grid-template-columns: 1fr 1fr;}
+  form button { justify-self: start}
+  .toolbar { grid-template-columns: 2fr 1fr auto; align-items: start;}
+  nav ul { gap: .25rem 1.5rem;}
+
+/*This is where the real table layout come in */
+    table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: hsl(0, 0%, 100%);
+    }
+    thead {
+        position: static;
+    }
+    tbody {
+        display: table-row-group;
+    }
+    tr {
+        display: table-row;
+        border:0;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+    }
+    td {
+        display: cell;
+        padding: .6rem;
+        border-bottom: 1px solid hsl(210, 14%, 89%);
+    }
+    td:before {
+        display: none;
+    }
+    td input {
+        width: 100%;
+    }
+    th {
+        text-align: left;
+        padding: .6rem;
+        border-bottom: 2px solid hsl(208, 7%, 46%);
+    }
+}
+/* 1024px and up: this is mainly for desktops, there will ony 4 cards in a row, roomier layout */
+@media(min-width: 1024px) {
+    .cards { grid-template-columns: repeat(4, 1fr);}
+    main {margin:0; padding: 2rem;}
+    header { 
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .75rem 2rem;
+    }
+}
+/* This is for people who dont want animations */
+@media(prefers-reduced-motion: reduce) {
+    *{
+    animation: none !important;
+    transition: none !important;
+    }
+}
+
+
