@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Planner</title>
+</head>
+<body>
+    <h1> Tests </h1>
+    <p id="summary" role="status">Running...</p>
+    <ul id="results"></ul>
+    <script type="module">
+        import  {checkTitle, checkDate, checkDuration, checkTag, isValidImport } from '.scripts/validator.js';
+
+        let passed = 0;
+        let failed = 0;
+
+        function test(name, condition) {
+            const item = document.createElement('li')
+            item.textContent = (condition ? 'PASS: ' : 'FAIL: ') + name;
+            item.style.color = condition ? 'green' : 'red';
+            document.getElementById('results').appendChild(item);
+            if (condition) passed++; else failed++;
+        }
+
+        function isOk(checkfunction, value) { return checkfunction(value) === ''; }
+
+        // Title
+        test('title: normal title is valid', isOk(checkTitle, 'Read chapter 1'));
+        test('title: leading space is rejected', !isOk(checkTitle, ' Read'));
+        test('title: trailing space is rejected', !isOk(checkTitle, 'Read '));
+        test('title: empty is rejected', !isOk(checkTitle, ''));
+        test('title: repeated words is rejected (back reference)', !isOk(checkTitle, 'Study the the notes'));
+        test('title: repeated words ignores upper/lower case', !isOk(checkTitle, 'Study Study'));
+        test('title: similar words are allowed', isOk(checkTitle, 'Read reading list'));
+
+        //Duration
+        test('duration: 90 is valid', isOk(checkDuration, '90'));
+        test('duration: 0 is valid', isOk(checkDuration, '0'));
+        test('duration: 1.5 is valid', isOk(checkDuration, '1.5'));
+        test('duration: 1.555 is rejected', !isOk(checkDuration, '1.555'));
+        test('duration: 007 is rejected', !isOk(checkDuration, '007'));
+        test('duration: -5 is rejected', !isOk(checkDuration, '-5'));
+        test('duartion: letters are rejected', !isOk(checkDuration, 'abc'));
+
+        //Date
+        test('date: 2026-10-13 is valid', isOk(checkDate, '2026-10-13'));
+        test('date: leap day 2024-02-29 is valid', isOk(checkDate, '2024-02-29'));
+        test('date: 2025-02-29 does not exist', !isOk(checkDate, '2025-02-29'));
+        test('date: month 13 is rejected', !isOk(checkDate, '2026-13-01'));
+        test('date: wrong is rejected', !isOk(checkDate, '13/10/2026'));
+
+        //Tag
+        test('tag: Study is valid', isOk(checkTag, 'Study'));
+        test('tag: Group Work is valid', isOk(checkTag, 'Group Work'));
+        test('tag: Part-time is valid', isOk(checkTag, 'Part-time'));
+        test('tag: numbers are rejected', !isOk(checkTag, 'Study2'));
+        test('tag: double space is rejected', !isOk(checkTag, 'Group  Work'));
+        test('tag: trailing hyphen is rejected', !isOk(checkTag, 'Study-'));
+    </script>
+</body>
+</html>
