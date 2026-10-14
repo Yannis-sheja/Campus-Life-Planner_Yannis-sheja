@@ -35,3 +35,15 @@ export function highlight(text, regex) {
     }
     return result + escapeHtml(text.slice(position));
 }
+
+export function filterRecords(records, regex) {
+    if  (regex === null) return records; 
+
+    const kept = [];
+    for (const record of records) {
+        if (record.title.search(regex) !== -1 || record.tag.search(regex) !== -1) {
+            kept.push(record);
+        }
+    }
+    return kept;
+}
