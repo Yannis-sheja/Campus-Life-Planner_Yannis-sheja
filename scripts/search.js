@@ -47,3 +47,17 @@ export function filterRecords(records, regex) {
     }
     return kept;
 }
+
+export function sortRecords(records, sortBy) {
+    const copy = records.slice();
+
+    copy.sort(function (a, b) {
+        if (sortBy === 'date-asc') return a.dueDate.localeCompare(b.dueDate);
+        if (sortBy === 'date-desc') return b.dueDate.localeCompare(a.dueDate);
+        if (sortBy === 'title-asc') return a.title.localeCompare(b.title);
+        if (sortBy === 'title-desc') return b.title.localeCompare(a.title);
+        if (sortBy === 'duration-asc') return a.duration - b.duration;
+        return b.duration - a.duration; 
+    });
+    return copy;
+}

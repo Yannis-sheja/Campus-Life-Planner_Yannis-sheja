@@ -11,6 +11,7 @@
     <ul id="results"></ul>
     <script type="module">
         import  {checkTitle, checkDate, checkDuration, checkTag, isValidImport } from '.scripts/validator.js';
+        import { compileRegex, highlight, filterRecords, sortRecords} from './scripts/search.js';
 
         let passed = 0;
         let failed = 0;
@@ -57,6 +58,30 @@
         test('tag: numbers are rejected', !isOk(checkTag, 'Study2'));
         test('tag: double space is rejected', !isOk(checkTag, 'Group  Work'));
         test('tag: trailing hyphen is rejected', !isOk(checkTag, 'Study-'));
+
+        //Search 
+        test('compileRegex: valid pattern give a RegExp', compileRegex('^Study', true) instanceof RegExp);
+        test('compileRegex: broken pattern gives null or no crash', compileRegex('(', true) === null);
+        test('compileRegex: empty text gives null', compileRegex('', true) === null);
+        test('compileRegex: can ignore  case', compileRegex('abc', true).test('ABC'));
+        test('compileRegex: can be case sensitive', !compileRegex('abc', false).test('ABC'));
+        test('highlight: wraps the march in <mark>', highlight('Coffee time', compileRegex('coffee', true)) === '<mark>Coffee</mark> time');
+        test('highlight: escapes HTML', highlight('<b>', null) === '&lt,b&gt;');
+        test('highlight: ignores empty matches', highlight('abc', compileRegex('x*', true)) === 'abc');
+
+        const list = [
+            { id: 'a', title: 'Banana', dueDate: '2026-01-02', duration: 30, tag: 'Food'},
+            { id: 'b', title: 'Apple', dueDate: '2026-01-01', duration: 90, tag: 'Study'},
+            { id: 'c', title: 'Cherry at 15:30', dueDate: '2026-01-03', duration: 5, tag: 'Study'},
+        ];
+
+        test('filter: finds by title start', filterRecords(list, compileRegex('^app', true)).length === 1);
+        test('filter: finds time tokens like 15:30', filterRecords(list, compileRegex('\\b\\d{2}:\\d{2}\\b', true))[0].id ==='c');
+        test('filter: also searches the tag', filterRecords(list, compileRegex('^Study', true)).length === 2);
+        test('sort: title A-Z', sortRecords(list, 'title-asc')[0].id === 'b');
+        test('sort: date newest first', sortRecords(list, 'date-desc')[0].id === 'c');
+        test('sort: duration high to low', sortRecords(list, 'duration-desc')[0].id === 'b');
+        test('sort: does not change the original list', list[0].id === 'a');
     </script>
 </body>
 </html>
