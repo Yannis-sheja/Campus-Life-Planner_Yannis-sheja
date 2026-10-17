@@ -1,0 +1,15 @@
+[
+    {"id":"rec_0001","title":"Read Chapter 4 of Algorithms","dueDate":"2026-10-10","duration":90,"tag":"Study","createdAt":"2026-10-01T08:00:00.000Z","updatedAt":"2026-10-01T08:00:00.000Z"},
+    {"id":"rec_0002","title":"Group project meeting at 14:30","dueDate":"2026-10-10","duration":60,"tag":"Group Work","createdAt":"2026-10-01T08:05:00.000Z","updatedAt":"2026-10-01T08:05:00.000Z"},
+    {"id":"rec_0003","title":"Gym Session","duedate":"2026-10-09","duration":45,"tag":"Health","createdAt":"2026-10-01T08:10:00.000Z","updatedAt":"2026-10-01T08:10:00.000Z"},
+    {"id":"rec_0004","title":"Chemistry lab report","dueDate":"2026-10-08","duration":120,"tag":"Study","createdAt":"2026-10-01T08:15:00.000Z","updatedAt":"2026-10-01T08:15:00.000Z"},
+    {"id":"rec_0005","title":"Pay hostel fees","dueDate":"2026-10-07", "duration":15,"tag":"Admin","createdAt":"2026-10-01T08:20:00.000Z","updatedAt":"2026-10-01T08:20:00.000Z"},
+    {"id":"rec_0006","title":"Club social night & games","dueDate":"2026-10-06","duration":180,"tag":"Social","createdAt":"2026-10-01T08:25:00.000Z","updatedAt":"2026-10-01T08:25:00.000Z"},
+    {"id":"rec_0007","title":"Revise <HTML> & CSS  notes","dueDate":"2026-10-05","duration":75.5,"tag":"Study","createdAt":"2026-10-01T08:30:00.000Z","updatedAt":"2026-10-01T08:30:00.000Z"},
+    {"id":"rec_0008","title":"Part-time shift at the library","dueDate":"2026-10-04","duration":240,"tag":"Part-time","createdAt":"2026-10-01T08:35:00.000Z","updatedAt":"2026-10-01T08:35:00.000Z"},
+    {"id":"rec_0009","title":"Leap day hackathon planning", "dueDate": "2026-02-29", "duration":1440,"tag":"Deep Work","createdAt":"2024-02-01T08:00:00.000Z","updatedAt":"2024-02-29T08:00:00.000Z"},
+    {"id":"rec_0010","title":"Tiny reminder: email advisor","dueDate":"2026-10-12","duration":0.25,"tag":"Admin","createdAt":"2026-10-02T09:00:00.000Z","updatedAt":"2026-10-02T09:00:00.000Z"},
+    {"id":"rec_0011","title":"Final exam marathon revision", "dueDate":"2026-02-29","duration":10000,"tag":"Study","createdAt":"2026-10-02T09:05:00.000Z","updatedAt":"2026-10-02T09:05:00.000Z"},
+    {"id":"rec_0012","title":"Millennium time capsule","dueDate":"2000-01-01","duration":0,"tag":"Other","createdAt":"2000-01-01T00:00:00.000Z","updatedAt":"2000-01-01T00:00:00.000Z"}
+
+]
