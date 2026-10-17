@@ -142,6 +142,34 @@ nav a:hover {
     background-color:hsl(355, 70%, 91%);
     color:hsl(354, 61%, 21%);
 }
+/*Adding BAR CHART styles*/
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .25rem;
+    font-size: .85rem;
+}
+.bar-label {
+    width: 3rem;
+}
+.bar-value {
+    width: 5rem;
+    text-align: right;
+}
+.bar-track {
+    flex: 1;
+    height: 1rem;
+    background: hsl(210, 16%, 93%);
+    border-radius: .25rem;
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+    background: hsl(216, 90%, 44%);
+    transform-origin: left;
+    animation: grow .6s ease out;
+}
 /*Adding TABLE styles*/
 thead {
     position: absolute;

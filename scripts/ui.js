@@ -32,7 +32,7 @@ function buttonHtml(action, label, extraClass, taskTitle) {
     'aria-label="' + label + ' ' + escapeHtml(taskTitle) + '">' + label + '</button>';
 }
 
-function viewRowHtml(record, regec, unit) { 
+function viewRowHtml(record, regex, unit) { 
     return '<tr data-id="' + record.id + '">' +
     '<td data-label="Title">' + highlight(record.title, regex) + '</td>' + 
     '<td data-label= "Due date">' + record.dueDate + '</td>' +

@@ -5,6 +5,7 @@ import { checkTitle, checkDate, checkDuration, checkTag, checkRecord,
     isValidImport } from "./validator.js";
 import { compileRegex, filterRecords, sortRecords } from "./search.js";
 import * as ui from "./ui.js";
+import { downloadJson } from './storage.js';
 
 function $(id) {
     return document.getElementById(id);
@@ -43,6 +44,7 @@ function refresh() {
         ui.renderTable(visible, regex, state);
         ui.renderDashboard(calculateStats(state.records),state);
     }
+}
    // Live Validation
 
     const checkers = {title: checkTitle, dueDate: checkDate, duration: checkDuration, tag: checkTag };
@@ -139,4 +141,64 @@ function refresh() {
         if (event.key === 'Enter') document.querySelector('[data-action="save"').click();
         if (event.key === 'Escape') document.querySelector('data-action="cancel').click();
     });
-}
+
+    //Settings
+    $('settingsForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const message = checkDuration($('cap').value.trim());
+        ui.showFieldError('cap', message);
+        if (message !== '')return;
+        
+        state.unit = $('unit').value;
+        state.cap = Number($('cap').value);
+        saveState();
+        refresh();
+        ui.showStatus('Settings saved');
+    });
+
+    //Export and Import
+    $('export').addEventListener('click', function() {
+        downloadJson(state.records);
+        ui.showStatus('Exported' + state.records.length+ 'tasks.');
+    });
+
+    $('import').addEventListener('change', async function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+            if (!isValidImport(data)) {
+                ui.showError('Import failed: the file does not look like planner data.');
+
+            } else if(confirm('Replace your tasks with these ' + data.length + ' imported tasks?')) {
+                replaceRecords(data);
+                refresh();
+                ui.showError('');
+                ui.showStatus('Imported ' + data.length + ' tasks.');
+            }
+        }catch(error) {
+            ui.showError('Import failed: that file is not a valid JSON. ');
+        }
+        event.target.value = '';
+    });
+
+    //Start the app
+    async function start() {
+        const hadSavedData = loadState();
+
+        if (!hadSavedData) {
+            try{
+                const response = await fetch('seed.json');
+                replaceRecords(await response.json());
+            }catch(error) {
+                ui.showError('Could not load seed.json. Open the app through web server (see README).');
+            }
+        }
+     $('unit').value = state.unit;
+     $('cap').value = state.cap;
+     refresh();
+    }
+    start();
