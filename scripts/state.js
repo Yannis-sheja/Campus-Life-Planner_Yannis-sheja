@@ -70,3 +70,45 @@ export function replaceRecords(newRecords) {
     state.records = newRecords;
     saveState();
 }
+
+//Dashboard Numbers
+function toIsoDate(date) {
+    const month= String(date.getMonth() + 1).padStart(2, '0');
+    const day= String(date.getDate()).padStart(2, '0');
+    return date.getFullYear() + '-' + month + '-' + day;
+}
+
+export function calculateStats(records, today = new Date()) {
+    let totalMinutes = 0;
+    const tagCounts = {};
+
+    for (const record of records) {
+        totalMinutes += record.duration;
+        tagCounts[record.tag] = (tagCounts[record.tag] || 0) + 1; 
+    }
+
+    let topTag = 'None yet';
+    let highest = 0;
+    for (const tag in tagCounts) {
+        if (tagCounts[tag] > highest) {
+            highest = tagCounts[tag];
+            topTag = tag;
+        }
+    }
+
+    const days = [];
+    for (let daysAgo = 6; daysAgo >= 0; daysAgo--) {
+        const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - daysAgo);
+        const date =toIsoDate(day);
+        let minutes = 0;
+        for (const record of records) {
+            if(record.dueDate === date) minutes += record.duration;
+        }
+        days.push({ date: date, minutes: minutes });
+    }
+    
+    let weekMinutes = 0;
+    for (const day of days)weekMinutes += day.minutes;
+
+    return { count: records.length, totalMinutes, topTag, days, weekMinutes };
+}
