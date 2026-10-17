@@ -113,11 +113,10 @@
                         <th scope="col">Tag </th>
                         <th scope="col">Actions</th>
                     </tr>
-                    
-                    <tbody id="rows"></tbody> <!-- This rows or body will be filled by JavaScript-->
                 </thead>
-                <p id="empty"></p>
-            </table>
+                <tbody id="rows"></tbody> <!-- This rows or body will be filled by JavaScript-->
+            </table> 
+            <p id="empty"></p>
          </section>
          <!-- The ADD TASK section-->
          <section id="add" aria-labelledby="addHeading">
@@ -143,9 +142,10 @@
                     <input id="tag" autocomplete="off" aria-describedby="tagError">
                     <div id="tagError" class="error"></div>
                 </div>
+                <button type="submit" class="btn btn-primary"> Add Task</button>
             </form>
          </section>
-         <section id="settings" arialabelledby="settingsHeading">
+         <section id="settings" aria-labelledby="settingsHeading">
             <h2 id="settingsHeading"> Settings </h2>
             <form id="settingsForm" novalidate>
                 <div>
@@ -171,6 +171,9 @@
             </div> 
          </section>
     </main>
+    <footer> 
+        <p> Campus Life Planner. made with plain HTML, CSS and JavaScript</p>
+    </footer>
    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>

@@ -10,26 +10,26 @@ function setText(id, text) {
 }
 
 function round(number) {
-    return matchMedia.round(number * 100) / 100;
+    return Math.round(number * 100) / 100;
 }
 
 export function formatDuration(minutes, unit) {
-    if (unit === 'hours') return round(minutes / 60) + 'h';
-    return round(minutes) + 'min';
+    if (unit === 'hours') return round(minutes / 60) + ' h';
+    return round(minutes) + ' min';
 }
 // Messages
 export function showStatus(text) { setText('status', text); }
 export function showError(text) { setText('error', text); }
 
-export function showFieldErro(fieldId, message) {
+export function showFieldError(fieldId, message) {
     setText(fieldId + 'Error', message); 
-    $(filedId).setAttribute('aria-invalid', message === '' ? 'false' : 'true');
+    $(fieldId).setAttribute('aria-invalid', message === '' ? 'false' : 'true');
 }
 
 // Table 
 function buttonHtml(action, label, extraClass, taskTitle) {
-    return '<button type="button" class="btn ' + extraClass + 'data-action="' + action + '"' + 
-    'aria-label="' + label + ' ' + escapeHtml(taskTitle) + '">' + label + '</button>';
+    return '<button type="button" class="btn ' + extraClass + '" data-action="' + action + '"' + 
+    ' aria-label="' + label + ' ' + escapeHtml(taskTitle) + '">' + label + '</button>';
 }
 
 function viewRowHtml(record, regex, unit) { 
@@ -70,7 +70,7 @@ export function renderTable(visible, regex, state) {
     else if (visible.length === 0) emptyText = 'No tasks match your search.';
     setText('empty', emptyText); 
     
-    setText('count', 'Showing' + visible.length + 'of' + state.records.length + 'tasks');
+    setText('count', 'Showing' + visible.length + ' of' + state.records.length + ' tasks');
 }
 
 // Dashboard
@@ -79,7 +79,7 @@ export function renderDashboard(stats, state) {
     setText('statCount', String(stats.count));
     setText('statTotal', formatDuration(stats.totalMinutes, state.unit))
     setText('statTop', stats.topTag)
-    setText('statWeek', formatDuration(stats.totalWeek, state.unit))
+    setText('statWeek', formatDuration(stats.weekMinutes, state.unit))
 
     let biggest = 1;
     for (const day of stats.days) {
@@ -88,10 +88,10 @@ export function renderDashboard(stats, state) {
 
     let chartHtml = '';
     for (const day of stats.days) {
-        const percent = (day.minutes/biggest)/100
-        chartHtml = '<div class ="bar-row">' + 
+        const percent = (day.minutes / biggest)/100
+        chartHtml += '<div class ="bar-row">' + 
         '<span class="bar-label">' + day.date.slice(5) +'</span>' +
-        '<div class="bar-track" role="progress bar" aria-label="Planned time on ' + day.date + '"' +
+        '<div class="bar-track" role="progressbar" aria-label="Planned time on ' + day.date + '"' +
         ' aria-valuemin="0" aria-valuemax="' + biggest + '" aria-valuenow="' + day.minutes + '">' + 
         '<div class="bar-fill" style="width:' + percent + '%"></div></div>' + 
         '<span class="bar-value">' + formatDuration(day.minutes, state.unit) + '</span></div>';

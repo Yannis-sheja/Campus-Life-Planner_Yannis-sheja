@@ -9,7 +9,7 @@ export function loadData() {
     }
 }
 
-export function saveData() {
+export function saveData(data) {
     localStorage.setItem(KEY, JSON.stringify(data));
 }
 

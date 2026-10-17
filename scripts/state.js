@@ -34,7 +34,7 @@ function makeId() {
 
 export function addRecord(values) {
     const now = new Date().toISOString();
-    state.record.push({
+    state.records.push({
         id: makeId(),
         title: values.title,
         dueDate: values.dueDate,
@@ -46,20 +46,20 @@ export function addRecord(values) {
     saveState();
 }
 
-export function updateRecord() {
+export function updateRecord(id, values) {
     for (const record of state.records) {
         if (record.id === id) {
             record.title = values.title;
             record.dueDate = values.dueDate;
             record.duration = Number(values.duration);
             record.tag = values.tag;
-            record.updatedAt = new Data().toISOString();
+            record.updatedAt = new Date().toISOString();
         }
     }
     saveState();
 }
 
-export function deleteRecord() {
+export function deleteRecord(id) {
     state.records = state.records.filter(function (record) {
         return record.id !== id;
     });

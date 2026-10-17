@@ -6,13 +6,13 @@
 // Title
 const titlePattern = /^\S(?:.*\S)?$/;
 //Duration
-const durationPattern = /^(0[1-9]\d*)(\.\d{1,2})?$/;
+const durationPattern = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
 //Date(YYYY-MM-DD)
-const datePattern = /^\d{4}-(0[1-9]1[0-2])-(0[1-9][12]\d|3[01])$/;
+const datePattern = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 //Tag
 const tagPattern = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
 //Advanced Pattern: Finds a word written twice. For example; "a a"
-const repeatedWordPattern = /\b(w+)\s+\1\b/i;
+const repeatedWordPattern = /\b(\w+)\s+\1\b/i;
 
 //Check Function
 export function checkTitle(value) {
@@ -52,12 +52,12 @@ export function checkTag(value) {
 export function checkRecord(record) {
     const errors = {};
     const titleError = checkTitle(record.title);
-    const dateError = checkDate(record.date);
+    const dateError = checkDate(record.dueDate);
     const durationError = checkDuration(String(record.duration));
     const tagError = checkTag(record.tag);
 
     if(titleError) errors.title = titleError;
-    if(dateError) errors.date = dateError;
+    if(dateError) errors.dueDate = dateError;
     if(durationError) errors.duration = durationError;
     if(tagError) errors.tag = tagError;
     return errors;
@@ -72,7 +72,7 @@ export function isValidImport(data) {
         if (typeof item !== 'object' || item === null) return false;
 
         const textFields = ['id', 'title', 'dueDate', 'tag', 'createdAt', 'updatedAt'];
-        for (const fileld of textFilelds) {
+        for (const field of textFields) {
             if (typeof item[field] !== 'string') return false;
         }
         if (typeof item.duration !== 'number') return false;

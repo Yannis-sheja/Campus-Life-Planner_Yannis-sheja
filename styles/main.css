@@ -108,18 +108,17 @@ nav a:hover {
     border: 1px solid hsl(210, 14%, 89%);
     border-radius: .5rem;
     padding: .75rem;
-    transition: transform .2s;
-    box-shadow: .2s;
+    transition: transform .2s box-shadow .2s;
 }
 .card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 .4rem 8rem hsla(0, 0%, 0%, 0.15);
+    box-shadow: 0 .4rem .8rem hsla(0, 0%, 0%, 0.15);
 
 }
 .card h3 {
     margin: 0;
     font-size: 17px;
-    color: #495057;
+    color: hsl(210, 9%, 31%);
 }
 .card p {
     margin: 0;
@@ -176,7 +175,7 @@ thead {
     left:-9999px;
 }
 table, tbody, tr, td {
-    display:block;
+    display: block;
 }
 tr {
     background-color: hsl(0, 0%, 100%);
@@ -187,7 +186,7 @@ tr {
     animation: fade .3s ease-out;
 }
 td {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
@@ -199,7 +198,7 @@ td input {
 /*Adding FORM AND BUTTONS styles*/
 form, .toolbar {
     display: grid;
-    gap: .1rem;
+    gap: 1rem;
 }
 label {
     display: block;
@@ -246,7 +245,7 @@ input[aria-invalid="true"] {
     font: inherit;
     cursor: pointer;
     color: hsl(216, 90%, 44%);
-    background: #fff;
+    background: hsl(0, 0%, 100%);
     border: 1px solid hsl(216, 90%, 44%);
     border-radius: .25rem;
     transition: background .2s, color .2s;
@@ -262,11 +261,19 @@ input[aria-invalid="true"] {
 .btn-primary:hover {
     background-color: hsl(216, 90%, 31%);
 }
+.btn-danger {
+    color: hsl(354, 61%, 43%);
+    border-color: hsl(0, 0%, 100%);
+}
+.btn-danger:hover {
+    background-color: hsl(354, 61%, 43%);
+    color: hsl(0, 0%, 100%);
+}
 
 /* Now its time for the fun part, ANIMATIONS,
 We are going to use the keyframes*/
-@keyframes fade { from {opacity: 0;} to {opacity: 1;}}
-@keyframes grow { from {transform: scaleX(0);} to {transform: scaleX(1)}}
+@keyframes fade { from {opacity: 0; } to {opacity: 1; }}
+@keyframes grow { from {transform: scaleX(0); } to {transform: scaleX(1); }}
 
 /* Adding BREAKPOINTS, this is where the screen gets wider*/
 /* 360px and up: This is mainly for normal phones where they only get 2 cards per row */
@@ -279,7 +286,7 @@ We are going to use the keyframes*/
 @media (min-width: 768px) {
   h1{ font-size: 2rem;}
   form { grid-template-columns: 1fr 1fr;}
-  form button { justify-self: start}
+  form button { justify-self: start;}
   .toolbar { grid-template-columns: 2fr 1fr auto; align-items: start;}
   nav ul { gap: .25rem 1.5rem;}
 
@@ -304,11 +311,11 @@ We are going to use the keyframes*/
         padding: 0;
     }
     td {
-        display: cell;
+        display: table-cell;
         padding: .6rem;
         border-bottom: 1px solid hsl(210, 14%, 89%);
     }
-    td:before {
+    td::before {
         display: none;
     }
     td input {
@@ -323,7 +330,7 @@ We are going to use the keyframes*/
 /* 1024px and up: this is mainly for desktops, there will ony 4 cards in a row, roomier layout */
 @media(min-width: 1024px) {
     .cards { grid-template-columns: repeat(4, 1fr);}
-    main {margin:0; padding: 2rem;}
+    main { padding: 2rem;}
     header { 
         display: flex;
         align-items: center;
