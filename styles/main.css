@@ -336,8 +336,8 @@ We are going to use the keyframes*/
   }
   main { padding: 1.5rem;}
   section { padding: 1.25rem 1.5rem; }
-  .cards { grid-template-columns: repeat(4, 1fr); gap: 75rem ;}
-  .card { padding: .75rem, 1rem;}
+  .cards { grid-template-columns: repeat(4, 1fr); gap: 1rem ;}
+  .card { padding: .75rem 1rem;}
   .card p { font-size: 1.25rem;}
   .bar-row { font-size: .95rem; margin-bottom: .4rem;}
   .bar-track { height: 1.25rem;}
@@ -399,7 +399,7 @@ We are going to use the keyframes*/
         margin: 0 auto;
         padding: 2rem;
         display: grid;
-        grid-template: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         column-gap: 2rem;
     }
     main >h1, #status, #error, #about, #dashboard, #tasks {
