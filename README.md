@@ -1,3 +1,10 @@
+### DEMO VIDEO
+Here is the link to the video: `https://youtu.be/UG4IOWeXnVk`
+
+### Website Link or live link
+
+Here is the website link: `https://yannis-sheja.github.io/Campus-Life-Planner_Yannis-sheja/`
+
 ### Data model
 `{ id, title, dueDate, duration (minutes), tag, createdAt, updatedAt }`
 
