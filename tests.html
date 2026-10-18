@@ -10,8 +10,9 @@
     <p id="summary" role="status">Running...</p>
     <ul id="results"></ul>
     <script type="module">
-        import  {checkTitle, checkDate, checkDuration, checkTag, isValidImport } from '.scripts/validator.js';
+        import  {checkTitle, checkDate, checkDuration, checkTag, isValidImport } from './scripts/validator.js';
         import { compileRegex, highlight, filterRecords, sortRecords} from './scripts/search.js';
+        import { state, calculateStats } from './scripts/state.js';
 
         let passed = 0;
         let failed = 0;
@@ -66,7 +67,7 @@
         test('compileRegex: can ignore  case', compileRegex('abc', true).test('ABC'));
         test('compileRegex: can be case sensitive', !compileRegex('abc', false).test('ABC'));
         test('highlight: wraps the march in <mark>', highlight('Coffee time', compileRegex('coffee', true)) === '<mark>Coffee</mark> time');
-        test('highlight: escapes HTML', highlight('<b>', null) === '&lt,b&gt;');
+        test('highlight: escapes HTML', highlight('<b>', null) === '&lt;b&gt;');
         test('highlight: ignores empty matches', highlight('abc', compileRegex('x*', true)) === 'abc');
 
         const list = [
@@ -82,6 +83,29 @@
         test('sort: date newest first', sortRecords(list, 'date-desc')[0].id === 'c');
         test('sort: duration high to low', sortRecords(list, 'duration-desc')[0].id === 'b');
         test('sort: does not change the original list', list[0].id === 'a');
+        //Import
+
+        const good = { id: 'x', title: 'Test', dueDate: '2026-01-01', duration: 10, tag: 'Study', createdAt: 'n', updatedAt: 'n'};
+        test ('import: a valid list passes', isValidImport([good]));
+        test ('import: not a list is rejected', !isValidImport({}));
+
+        test ('import: bad date is rejected', !isValidImport({ ...good, dueDate: 'tomorrow'}));
+        test ('import: duplicate ids are rejected', !isValidImport([good, good]));
+        test ('import: missing field is rejected', !isValidImport([{ ...good, title: undefined}]));
+
+        //Stats
+        state.records = [
+            { dueDate: '2026-10-10', duration: 60, tag: 'Study'},
+            { dueDate: '2026-10-09', duration: 30.5, tag: 'Study'},
+            { dueDate: '2026-01-01', duration: 10, tag: 'Fun'},
+        ];
+        const stats = calculateStats(state.records, new Date(2026, 9 ,10));
+        test('stats: count', stats.count === 3);
+        test('stats: top tag', stats.topTag === 'Study');
+        test('stats: 7 days', stats.days    .length === 7);
+        test('stats: week total ignores old tasks', stats.weekMinutes === 90.5);
+
+        document.getElementById('summary').textContent = passed + ' passed, ' + failed + ' failed';
     </script>
 </body>
 </html>

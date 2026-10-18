@@ -1,7 +1,7 @@
 [
     {"id":"rec_0001","title":"Read Chapter 4 of Algorithms","dueDate":"2026-10-10","duration":90,"tag":"Study","createdAt":"2026-10-01T08:00:00.000Z","updatedAt":"2026-10-01T08:00:00.000Z"},
     {"id":"rec_0002","title":"Group project meeting at 14:30","dueDate":"2026-10-10","duration":60,"tag":"Group Work","createdAt":"2026-10-01T08:05:00.000Z","updatedAt":"2026-10-01T08:05:00.000Z"},
-    {"id":"rec_0003","title":"Gym Session","duedate":"2026-10-09","duration":45,"tag":"Health","createdAt":"2026-10-01T08:10:00.000Z","updatedAt":"2026-10-01T08:10:00.000Z"},
+    {"id":"rec_0003","title":"Gym Session","dueDate":"2026-10-09","duration":45,"tag":"Health","createdAt":"2026-10-01T08:10:00.000Z","updatedAt":"2026-10-01T08:10:00.000Z"},
     {"id":"rec_0004","title":"Chemistry lab report","dueDate":"2026-10-08","duration":120,"tag":"Study","createdAt":"2026-10-01T08:15:00.000Z","updatedAt":"2026-10-01T08:15:00.000Z"},
     {"id":"rec_0005","title":"Pay hostel fees","dueDate":"2026-10-07", "duration":15,"tag":"Admin","createdAt":"2026-10-01T08:20:00.000Z","updatedAt":"2026-10-01T08:20:00.000Z"},
     {"id":"rec_0006","title":"Club social night & games","dueDate":"2026-10-06","duration":180,"tag":"Social","createdAt":"2026-10-01T08:25:00.000Z","updatedAt":"2026-10-01T08:25:00.000Z"},

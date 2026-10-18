@@ -70,7 +70,7 @@ export function renderTable(visible, regex, state) {
     else if (visible.length === 0) emptyText = 'No tasks match your search.';
     setText('empty', emptyText); 
     
-    setText('count', 'Showing' + visible.length + ' of' + state.records.length + ' tasks');
+    setText('count', 'Showing ' + visible.length + ' of ' + state.records.length + ' tasks');
 }
 
 // Dashboard
@@ -88,7 +88,7 @@ export function renderDashboard(stats, state) {
 
     let chartHtml = '';
     for (const day of stats.days) {
-        const percent = (day.minutes / biggest)/100
+        const percent = (day.minutes / biggest) * 100
         chartHtml += '<div class ="bar-row">' + 
         '<span class="bar-label">' + day.date.slice(5) +'</span>' +
         '<div class="bar-track" role="progressbar" aria-label="Planned time on ' + day.date + '"' +
